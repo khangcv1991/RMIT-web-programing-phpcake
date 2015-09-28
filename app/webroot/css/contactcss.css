@@ -1,0 +1,57 @@
+@CHARSET "ISO-8859-1";
+
+label {
+	color: white;
+}
+
+.title-contactus {
+	color: white;
+	font-weight: bolder;
+	font-size: 200%;
+	margin-top: 30px;
+	margin-bottom: 50px;
+	font-weight: bolder;
+}
+
+.input-area {
+	border-radius: 5px;
+	height: 30px;
+	width: 170px;
+}
+
+.left-q-ques-type {
+	color: white;
+}
+
+.right-q-cust-type {
+	color: white;
+}
+
+.submit-button {
+	width: 100px;
+	height: 30px;
+	border-radius: 8px;
+	border: 1px solid;
+	border-color: white;
+	background-color: red;
+	color: white;
+	text-align: center;
+	padding-top: 5px;
+	font-weight: bolder;
+}
+
+.submit-button:hover {
+	width: 100px;
+	height: 30px;
+	border-radius: 8px;
+	border: 1px solid;
+	border-color: white;
+	background-color: red;
+	color: white;
+	text-align: center;
+	font-weight: bolder;
+	font-size: 110%;
+	padding-top: 5px;
+	transition: 0.2s;
+}
+

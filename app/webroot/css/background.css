@@ -1,0 +1,385 @@
+@CHARSET "ISO-8859-1";
+/*general apply*/
+body {
+	background-color: black;
+	font-family: Museo500, 'Century Gothic', CenturyGothic, AppleGothic,
+		Arial, Helvetica, sans-serif;
+	color: red;
+}
+
+a {
+	text-decoration: none;
+	color: red;
+}
+
+li {
+	float: left;
+	list-style: none;
+}
+
+div {
+	display: block;
+}
+
+.wrapper {
+	width: 940px;
+	margin: auto;
+}
+/*end general apply*/
+/*header*/
+.header {
+	height: 200px;
+	width: 940px;
+	background:
+		url("http://www.palacecinemas.com.au/img/common/xheaderbg.png.pagespeed.ic.WLoDZ5Pe9b.png")
+		bottom left repeat-x;
+}
+
+.header-nav {
+	width: 100%;
+	overflow: auto;
+	background: black;
+	
+
+}
+
+.cart-wrapper ul {
+	margin-left: 0px;
+	background-color: #404040;
+	-webkit-padding-start: 0px;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+#cart-money {
+	font-size: 140%;
+}
+
+.cart-wrapper ul li {
+	width: 120px;
+	text-align: right;
+	
+	
+}
+
+.cart-wrapper ul li a {
+	font-size: 14px;
+	color: red;
+}
+
+.cart-wrapper ul li:last-child {
+	border-right: none;
+	padding-left: 2px;
+	text-align: right;
+}
+
+.cart-wrapper {
+	float: right;
+}
+
+.left-header {
+	width: 165px;
+	/* height: 100%; */
+	padding-top: 12px;
+	float: left;
+	margin-left: 10px;
+	position: absolute;
+}
+
+.right-header {
+	float: right;
+	width: 400px;
+	/* height: 100%; */
+}
+.cen-header{
+	width: 200px;
+	padding-top:0px;
+	position:absolute;
+}
+.title {
+	position: absolute;	
+	left: 300px;
+	width:400px;
+	font-style: italic;
+}
+
+.sub-title {
+	position: absolute;
+	top: 50px;
+	right: 400px;
+	font-style: italic;
+}
+/*search box */
+.search-wrapper {
+	position: relative;
+	width: 200px;
+	height: 33px;
+	float: right;
+	margin-right: 35px;
+	margin-top: 100px;
+}
+
+.search-wrapper input {
+	font-size: 1.286em;
+	font-family: Museo300;
+}
+
+.fa-icon {
+	color: #FFFFFF;
+	position: absolute;
+	background-image:
+		url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2225%22%20height%3D%2225%22%20viewBox%3D%220%200%2025%2025%22%3E%3Csymbol%20viewBox%3D%220%20-12%2010%2012%22%3E%3Cg%3E%3Cpath%20fill%3D%22%23DB2B27%22%20d%3D%22M5-5.134c-2.031%200-5-1.879-5-6.033v-.833h10v.832c0%204.153-2.969%206.034-5%206.034zM7.5-4l-.5-1h-4l-.5%201h-.5v2.312l.5.469%201.5%201.219h2l1.5-1.219.5-.469v-2.312z%22%2F%3E%3C%2Fg%3E%3C%2Fsymbol%3E%3Cg%3E%3Cpath%20fill%3D%22%23DC291E%22%20d%3D%22M19.727%2016.084l-2.849-2.849c.5-.891.788-1.915.788-3.007%200-3.4-2.766-6.167-6.167-6.167s-6.167%202.766-6.167%206.167c0%203.4%202.766%206.167%206.167%206.167%201.222%200%202.359-.362%203.318-.977l2.788%202.788c.293.293.677.439%201.061.439s.768-.146%201.061-.439c.586-.586.586-1.536%200-2.122zm-12.394-5.856c0-2.298%201.869-4.167%204.167-4.167s4.167%201.869%204.167%204.167c0%202.297-1.869%204.167-4.167%204.167s-4.167-1.869-4.167-4.167z%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
+	background-repeat: no-repeat;
+	position: absolute;
+	padding-top: 60px;
+	position: absolute;
+	width: 24px;
+	height: 0px;
+	overflow: hidden;
+}
+
+.search-box {
+	width: 190px;
+	padding-right: 33px;
+	border-radius: 5px;
+}
+/*end search box*/
+
+/*end header*/
+
+/*navigator*/
+.navigator {
+	color: red;
+	height: 45px;
+	width: 100%;
+	background-color: #333;
+}
+
+.navigator a {
+	color: red;;
+}
+
+.nav {
+	width: 100%;
+	height: 35px;
+}
+
+.nav li {
+	width: 135px;
+	height: 35px;
+	font-size: 20px;
+	list-style: none;
+	float: left;
+	font-weight: normal;
+	padding-top: 10px;
+	text-align: center;
+	border-right: 1px solid;
+	border-color: black;
+	text-transform: uppercase;
+}
+
+.nav:hover {
+	width: 100%;
+	height: 35px;
+}
+
+.nav li:hover {
+	width: 135px;
+	height: 35px;
+	font-size: 21px;
+	list-style: none;
+	float: left;
+	font-weight: bolder;
+	padding-top: 10px;
+	text-align: center;
+	border-color: black;
+	text-transform: uppercase;
+	color: white;
+	transition: 0.2s;
+}
+
+.nav li:last-child {
+	border-right: none;
+}
+/*Body */
+.body-wrapper {
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+
+/*footer*/
+.footer {
+	overflow: auto;
+	border-top: 1px solid;
+	border-bottom: 1px solid;
+	border-color: white;
+	width: 100%;
+	text-align: center;
+	margin-top: 10px;
+	padding-top: 5px;
+}
+
+.footer-nav {
+	margin-left: 0px;
+	background-color: #404040;
+	-webkit-padding-start: 0px;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 0em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+}
+
+.footer-nav li {
+	width: 100px;
+	border-right: 1px solid;
+	border-color: white;
+}
+
+.footer-nav a {
+	font-size: 14px;
+	color: white;
+}
+
+.footer-nav li:last-child {
+	border-right: none;
+	padding-left: 2px;
+}
+
+.footer-part1 {
+	padding-top: 15px;
+	padding-left: 0px;
+	height: 100px;
+}
+
+.left-footer-part1 {
+	text-align: center;
+	color: white;
+	float: left;
+	font-size: 0.7em;
+	width: 30%;
+	height: 30px;
+}
+
+.middle-footer-part1 {
+	float: left;
+	text-align: center;
+	color: white;
+	text-align: center;
+	left: 550px;
+	font-size: 0.7em;
+	width: 30%;
+	height: 30px;
+	color: white;
+}
+
+.right-footer-part1 {
+	text-align: center;
+	float: right;
+	height: 30px;
+	float: right;
+}
+
+.footer-part2 {
+	padding-top: 15px;
+	padding-left: 0px;
+	height: 40px;
+}
+
+.left-footer-part2 {
+	float: left;
+	width: 60%;
+	height: 30px;
+}
+
+.right-footer-part2 {
+	float: right;
+	width: 30%;
+	color: white;
+}
+/*social media buttons reference to rmit.edu.au*/
+.social-wrapper {
+	margin: auto;
+	float: right;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+}
+
+.social-group {
+	height: 32px;
+	padding: 0;
+	margin-top: 0;
+	box-sizing: border-box;
+	display: block;
+	list-style-type: disc;
+}
+
+.social-group li {
+	display: inline-block;
+	height: 32px;
+	margin-left: 10px;
+	line-height: .9em;
+	margin-bottom: 8px;
+	box-sizing: border-box;
+	text-align: -webkit-match-parent
+}
+
+.social-facebook {
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	background-image:
+		url("file:///C:/xampp/htdocs/SVN_REPOSIBILITY_HTDOCS/WebprogramingAss/img/facebook.png");
+	background-repeat: no-repeat;
+}
+
+.social-twitter {
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	background-image:
+		url("file:///C:/xampp/htdocs/SVN_REPOSIBILITY_HTDOCS/WebprogramingAss/img/twitter.png");
+	background-repeat: no-repeat;
+}
+
+.social-youtube {
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	background-image:
+		url("file:///C:/xampp/htdocs/SVN_REPOSIBILITY_HTDOCS/WebprogramingAss/img/facebook.png");
+	background-repeat: no-repeat;
+}
+
+.social-linkedin {
+	display: inline-block;
+	height: 35px;
+	width: 35px;
+	background-image:
+		url("file:///C:/xampp/htdocs/SVN_REPOSIBILITY_HTDOCS/WebprogramingAss/img/in.png");
+	background-repeat: no-repeat;
+}
+/*end social media*/
+.hidden-error {
+	display: none;
+}
+
+.display-error {
+	color: red;
+	font-weight: bolder;
+}

@@ -1,0 +1,220 @@
+@CHARSET "ISO-8859-1";
+/*general apply*/
+
+/*Body */
+.body-wrapper {
+	margin-top: 10px;
+}
+
+.left-body-wrapper {
+	width: 100%;
+	height: 500px;
+	float: left;
+}
+
+.right-body-wrapper {
+	/* width: 290px;
+	height: 500px;
+	background-color: gray;
+	float: right; */
+}
+/*end body*/
+/*tabs*/
+#mtabs {
+	margin-top: 10px;
+	overflow: auto;
+	height: 100%;
+}
+
+#mtabs-nav {
+	width: 100%;
+	height: 45px;
+	/* background-color: #333; */
+	text-align: center;
+}
+
+#mtabs-nav ul {
+	-webkit-margin-before: 0em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+}
+
+#mtabs-nav ul li {
+	width: 135px;
+	height: 40px;
+	text-align: left;
+	text-transform: uppercase;
+	padding-top: 5px;
+	padding-right: 15px;
+	font-weight: bolder;
+	text-align:center;
+	cursor:pointer;
+}
+
+#mtabs-nav ul li a {
+	text-align: center;
+	color: gray;
+	font-size: 14px;
+	width: 135px;
+	height: 40px;
+}
+
+#mtabs-nav ul li a:hover {
+	color: red;
+}
+
+#mtabs-nav ul li a:active {
+	color: red;
+}
+
+.mtabs-content {
+	background-color: #42444a;
+	overflow: auto;
+	height: 350px;
+}
+/*movie item*/
+.items-wrapper {
+	float: left;
+	padding-left: 0px;
+}
+
+.items {
+	display: block;
+	list-style-type: disc;
+	-webkit-margin-before: 1em;
+	-webkit-margin-after: 1em;
+	-webkit-margin-start: 0px;
+	-webkit-margin-end: 0px;
+	-webkit-padding-start: 0px;
+}
+
+.items li:first-child {
+	margin-left: 0px;
+}
+
+.theme:first-child {
+	margin-left: 0px;
+}
+
+#first-item {
+	margin-left: 0px;
+}
+
+.theme {
+	float: left;
+	height: 300px;
+	list-style: none;
+	margin-left: 20px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.item-wrapper {
+	background: #42444a;
+	background-color: rgb(66, 68, 74);
+	width: 168px;
+	height: 310px;
+	overflow: hidden;
+	position: relative;
+}
+
+.left-item-info {
+	width: 65%;
+	float: left;
+	color: red;
+}
+
+.right-item-info {
+	width: 25%;
+	float: right;
+	padding-left: 5px;
+	padding-right: 0px;
+}
+
+.item-info {
+	position: absolute;
+	margin-top: 285px;
+	font-size: 0.8em;
+	text-align: center;
+	width: 100%;
+	color:white;
+}
+
+.movie-image {
+	position: absolute;
+	height: "280px";
+	width: "168px";
+}
+/*end movie item*/
+/*button*/
+.item-buttons {
+	margin: auto;
+	margin-top: 56px;
+	width: 100%;
+	height: 32px;
+}
+
+.session-button {
+	float: left;
+	height: 29px;
+	width: 77px;
+	background:
+		url("http://villagecinemas.com.au/resources/VCAWebsite/img/buy-ticket-btn-small.png")
+		no-repeat scroll 0 -28px transparent;
+}
+/*end */
+.info-button {
+	float: right;
+	height: 29px;
+	width: 59px;
+	background:
+		url("http://villagecinemas.com.au/resources/VCAWebsite/img/info-btn.png")
+		no-repeat -2px 0;
+}
+/*Slide show*/
+.slide-show {
+	height: 350px;
+	width: 100%;
+	background-color: white;
+	margin-top: 10px;
+}
+
+/*timetable*/
+table {
+	color: white;
+	margin-top: 15px;
+}
+
+th, td {
+	
+	margin: 0;
+	text-align: center;
+	border-collapse: collapse;
+	outline: 1px solid #e3e3e3;
+}
+
+td {
+	padding: 5px 10px;
+}
+
+th {
+	background: red;
+	color: white;
+	padding: 5px 10px;
+	text-transform: uppercase;
+}
+
+td:hover {
+	cursor: pointer;
+	background: red;
+	color: white;
+}
+.discount-price{
+	background-color: green;
+	color: white;
+}
+.normal-price{
+	background-color: yellow;
+	color: black;
+}

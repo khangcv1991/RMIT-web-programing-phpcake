@@ -1,0 +1,113 @@
+@CHARSET "ISO-8859-1";
+
+.booking-wrapper {
+	overflow: auto;
+}
+
+.input-area {
+	border-radius: 5px;
+	text-align:right;
+	height: 30px;
+	width: 170px;
+}
+.q-button{
+	float:right;
+	padding-right: 220px;
+}
+.submit-button {
+	width: 100px;
+	height: 30px;
+	border-radius: 8px;
+	border: 1px solid;
+	border-color: white;
+	background-color: red;
+	color: white;
+	text-align: center;
+	padding-top: 5px;
+	font-weight: bolder;
+	margin-left: 400px;
+	margin-top: 20px;
+}
+
+.submit-button:hover {
+	width: 100px;
+	height: 30px;
+	border-radius: 8px;
+	border: 1px solid;
+	border-color: white;
+	background-color: red;
+	color: white;
+	text-align: center;
+	font-weight: bolder;
+	font-size: 110%;
+	padding-top: 5px;
+	transition: 0.2s;
+}
+
+#mBookingForm {
+	color: white;
+}
+
+table {
+	color: white;
+	margin:auto;
+}
+
+#seat_map {
+	
+	width: 100%;
+	height: 450px;
+	margin-top: 30px;
+	color:white;
+}
+
+.seat-row {
+	height: 40px;
+	margin: auto;
+	margin-top: 3px;
+}
+/* normal display*/
+.seat{
+	width: 40px;
+	height: 40px;
+	border-radius: 8px;
+	margin-right: 3px;
+	float: left;
+	text-align: center;
+	cursor: pointer;
+}
+.selecting{
+	background-color: red;
+}
+.first-class{
+	background-color: rgba(255, 255, 0, 0.8);
+}
+.normal-class{
+	background-color: #B9DEA0;
+}
+.bean-class{
+	background-color: #5600FF;
+}
+.avaiable {
+	
+	
+	
+}
+
+.unavaiable {
+	
+	background-color: #804040;
+	cursor: not-allowed;
+}
+/* normal type*/
+.sa {
+	
+}
+
+.sp {
+	
+}
+
+.sc {
+	
+}
