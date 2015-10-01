@@ -1,14 +1,24 @@
 
 <?php echo $this->Html->css('bookingcss'); 
 	echo $this->Html->script('bookingJS');
-	echo $this->Session->flash("asdasd");
+
+	
 ?>
+
 <body onload="initiateMap()">
 
 <div class="body-wrapper" >
 	
-	<form action="bookingAction.php" method="post" id="mBookingForm">
+	<form action="<?php echo $this->webroot; ?>booking/add/" method="Post" id="mBookingForm">
 		<input type="hidden" id="curr-cart" name="curr_cart" value=""/>
+		<input type="hidden" id="SA-cart" name="SA_cart" value=""/>
+		<input type="hidden" id="SP-cart" name="SP_cart" value=""/>
+		<input type="hidden" id="SC-cart" name="SC_cart" value=""/>
+		<input type="hidden" id="FA-cart" name="FA_cart" value=""/>
+		<input type="hidden" id="FC-cart" name="FC_cart" value=""/>
+		<input type="hidden" id="B1-cart" name="B1_cart" value=""/>
+		<input type="hidden" id="B2-cart" name="B2_cart" value=""/>
+		<input type="hidden" id="B3-cart" name="B3_cart" value=""/>
 		
 		<div class="booking-wrapper" onclick="calculatePrice();">
 			<label for="movie-name"> Movie Name</label> <select name="movie_name"
@@ -18,7 +28,10 @@
 				<option>Force of Destiny</option>
 				<option>Ben-Hur</option>
 				<option>A Walk in the Woods</option>
-			</select> <label for="movie-day"> Session Day</label> <select name="movie_day"
+			
+			</select>
+			
+			<label for="movie-day"> Session Day</label> <select name="movie_day"
 				id="movie-day" class="input-area">
 				<option>please select</option>
 				<option></option>
@@ -36,9 +49,12 @@
 			</select> <label></label> <br> <span class="hidden-error"
 				id="error-movie-select"> you have to select movie and chose
 				time</span></label>
+				
+				<?php print_r( $this->Session->read('screenings'));?>
 			<div id="seat_map" onclick="seat_onClick(event)">
 
 			</div>
+			
 			<table>
 
 				<tr>

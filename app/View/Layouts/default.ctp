@@ -32,6 +32,22 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 		echo $this->fetch('meta');
 		echo $this->fetch('css');
 		echo $this->fetch('script');
+		$total = 0;
+		if ($this->Session->check ( 'screenings' )) {
+			$i = 0;
+			foreach ($this->Session->read('screenings') as $key => $value) {
+				
+				/*foreach ($this->Session->read('screenings') as $key2 => $value2) {
+					print_r($key2)			;
+					print_r($value2)			;
+		   	 		$total += intval(str_replace('$','',$value2['sub-total']));
+		   	 	}*/
+		   	 	//print_r($value['sub-total']);
+		   	 	$total += intval(str_replace('$','',$value['sub-total']));
+		   	 	$i++;
+		   	 	
+			}
+		}
 	?>
 </head>
 <body>
@@ -40,7 +56,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 				<div class="header-nav">
 					<div class="cart-wrapper">
 						<ul>
-							<li><a href="#"><span id="cart-money">$0.00 </span><img
+							<li><a href="<?php echo $this->webroot; ?>pages/cart"><span id="cart-money">$<?php echo $total?>.00 </span><img
 									src="<?php echo $this->webroot; ?>img/cart.png" alt="Smiley face" height="21" width="21"></a>
 								<ul>
 								</ul></li>
@@ -82,7 +98,7 @@ $cakeVersion = __d('cake_dev', 'CakePHP %s', Configure::version())
 			<li><a href="<?php  echo $this->webroot."pages/movie";?>">Movie</a></li>
 			<li><a href="#">Event</a></li>
 			<li><a href="#">Offers</a></li>
-			<li><a href="<?php  echo $this->webroot."pages/bookingpage";?>">Booking</a></li>
+			<li><a href="<?php  echo $this->webroot."pages/booking";?>">Booking</a></li>
 			<li><a href="#">Location</a></li>
 			<li><a href="<?php  echo $this->webroot."pages/contactpage";?>">Contact Us</a></li>
 		</ul>

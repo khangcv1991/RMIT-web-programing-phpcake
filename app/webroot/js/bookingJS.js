@@ -99,16 +99,16 @@ var seat_class_type = {
 	BEAN : 3,
 };
 
-function addSeatToCart(seatID){
-	var e = document.getElementById("curr-cart");
+function addSeatToCart(seatID, type){
+	var e = document.getElementById(type.toUpperCase() + "-cart");
 	var items = e.value;
 	if(items.indexOf(seatID) < 0 ){
 		items = items + " " + seatID;
 	}
 	 e.value = items;
 }
-function removeSeatFromCart(seatID){
-	var e = document.getElementById("curr-cart");
+function removeSeatFromCart(seatID, type){
+	var e = document.getElementById(type.toUpperCase() + "-cart");
 	var items = e.value;
 	e.value = items.replace(seatID, "").trim();
 	
@@ -185,11 +185,16 @@ function changeTxTSeat(e, type, text) {
 		}
 		if (count != -2) {
 			e.innerHTML = seat_normal_type[count];
-			//add seat to cart
-			addSeatToCart(e.id);
+			
 			//set quanity
 			changeTicketQuanity(seat_class_type.NORMAL, count, 1);
+			//add seat
+			addSeatToCart(e.id, seat_normal_type[count]);
+			
 			if(count > 0){
+				//remove seat to cart
+			removeSeatFromCart(e.id, seat_normal_type[count - 1]);
+			
 				//set quanity
 			changeTicketQuanity(seat_class_type.NORMAL, count - 1 , -1);
 			}
@@ -203,7 +208,7 @@ function changeTxTSeat(e, type, text) {
 			appendCSSclassByTag(e, "normal-class");
 			removeCSSclassByTag(e, "selecting");
 			//remove seat from cart
-			removeSeatFromCart(e.id);
+			removeSeatFromCart(e.id, seat_normal_type[seat_normal_type.length - 1]);
 			//set quantity
 			changeTicketQuanity(seat_class_type.NORMAL, seat_normal_type.length - 1, -1);
 		}
@@ -219,11 +224,15 @@ function changeTxTSeat(e, type, text) {
 		}
 		if (count != -2) {
 			e.innerHTML = seat_first_type[count];
-			//add seat to cart
-			addSeatToCart(e.id);
+			
 			//set quanity
 			changeTicketQuanity(seat_class_type.FIRST, count, 1);
+			//add seat to cart
+			addSeatToCart(e.id, seat_first_type[count]);
 			if(count > 0){
+				//remove seat to cart
+			removeSeatFromCart(e.id, seat_first_type[count - 1]);
+			
 				//set quanity
 			changeTicketQuanity(seat_class_type.FIRST, count - 1, -1);
 			}
@@ -236,7 +245,7 @@ function changeTxTSeat(e, type, text) {
 			appendCSSclassByTag(e, "first-class");
 			removeCSSclassByTag(e, "selecting");
 			//remove seat from cart
-			removeSeatFromCart(e.id);
+			removeSeatFromCart(e.id, seat_first_type[seat_first_type.length - 1]);
 			//set ticket quanity
 			changeTicketQuanity(seat_class_type.FIRST, seat_first_type.length - 1, -1);
 		}
@@ -258,10 +267,13 @@ function changeTxTSeat(e, type, text) {
 		if (count != -2) {
 			e.innerHTML = seat_bean_type[count];
 			//add seat to cart
-			addSeatToCart(e.id);
+			addSeatToCart(e.id, seat_bean_type[count]);
 			//set quanity
 			changeTicketQuanity(seat_class_type.BEAN, count, 1);
 			if(count > 0){
+				//add seat to cart
+			removeSeatFromCart(e.id, seat_bean_type[count - 1]);
+			
 				//set quanity
 			changeTicketQuanity(seat_class_type.BEAN, count - 1, -1);
 			}
@@ -272,7 +284,7 @@ function changeTxTSeat(e, type, text) {
 		} else {
 			e.innerHTML = e.id;
 			//remove seat from cart
-			removeSeatFromCart(e.id);
+			removeSeatFromCart(e.id, seat_bean_type[seat_bean_type.length - 1]);
 			//set quanity
 			changeTicketQuanity(seat_class_type.BEAN, seat_bean_type.length - 1, -1);
 			appendCSSclassByTag(e, "bean-class");

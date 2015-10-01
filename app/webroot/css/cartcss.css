@@ -1,0 +1,145 @@
+@CHARSET "ISO-8859-1";
+table {
+	color: white;
+	margin-top: 15px;
+}
+
+th, td {
+	
+	margin: 0;
+	text-align: center;
+	border-collapse: collapse;
+	outline: 1px solid #e3e3e3;
+}
+
+td {
+
+	padding: 5px 10px;
+}
+
+th {
+	width:120px;
+	color: black;
+	background-color: white;
+	padding: 5px 10px;
+	text-transform: uppercase;
+}
+
+.item-wrapper{
+	background-color: #333;
+	overflow: auto;
+	border-radius: 5px;
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 15px;
+	margin: auto;
+	width:550px;
+	color: white;
+}
+.movie-name{
+	font-size:120%;
+	font-weight:bolder;
+}
+
+.final-info{
+	width:100%;
+	margin-top:40px;
+	float:right;
+	text-align:right;
+	color:white;
+	overflow:auto;
+	
+}
+.group-button-wrapper{
+	width:100%;
+	overflow:auto;
+}
+.left-button-group{
+	width:50%;
+	float:left;
+}
+.right-button-group{
+	width: 100;
+	float:right;
+	margin-right:30px;
+	display:inline-block;
+}
+.input-area {
+	border-radius: 5px;
+	text-align:right;
+	height: 30px;
+	width: 170px;
+}
+.delete-button{
+	margin-top:20px;
+	width: 150px;
+	height: 30px;
+	background: red;
+	border: 1px solid;
+	border-color: red;
+	float: left;
+	border-radius: 8px;
+	font-size: 120%;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	padding-left: 2px;
+	padding-top: 3px;
+	font-weight: bolder;
+	margin-left: 390px;
+}
+.empty-button{
+	margin-top:20px;
+	width: 150px;
+	height: 30px;
+	background: red;
+	border: 1px solid;
+	border-color: red;
+	float: right;
+	border-radius: 8px;
+	font-size: 120%;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	padding-left: 2px;
+	padding-top: 3px;
+	font-weight: bolder;
+	margin-left: 390px;
+}
+.check-button{
+	margin-top:20px;
+	width: 150px;
+	height: 30px;
+	background: red;
+	border: 1px solid;
+	border-color: red;
+	float: right;
+	border-radius: 8px;
+	font-size: 120%;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	padding-left: 2px;
+	padding-top: 3px;
+	font-weight: bolder;
+	margin-left: 390px;
+}
+.apply-button{
+	margin-top:20px;
+	width: 80px;
+	height: 30px;
+	background: red;
+	border: 1px solid;
+	border-color: red;
+	float: right;
+	border-radius: 8px;
+	font-size: 120%;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	padding-left: 2px;
+	padding-top: 3px;
+	font-weight: bolder;
+	margin-left: 390px;
+}
