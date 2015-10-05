@@ -4,14 +4,12 @@
 <meta charset="ISO-8859-1">
 <?php
 echo $this->Html->css ( 'cartcss' );
-?>
-</head>
-<body>
-
-	<div class="body-wrapper">
-		
-		<?php
-		
+echo $this->Html->script('cartJS');
+function display( $session, $webroot ){
+	if($session->read ('screenings') == null)
+		 	return;
+	echo $session->read['check-vocher'];
+		//print_r($this->session->read(''));
 		$tiketType = array (
 				'Adult',
 				'Consession',
@@ -22,15 +20,30 @@ echo $this->Html->css ( 'cartcss' );
 				'Bean bag 2',
 				'Bean bag 3' 
 		);
-		foreach ( $this->session->read ('screenings') as &$value ) {
-			print_r($value)
-;			echo '<div class="item-wrapper">
+		$index = 0;
+				
+		foreach ( $session->read ('screenings') as &$value ) {
+			//print_r($value);
+			echo '<form action="';
+			echo $webroot;
+			echo 'booking/delete/' ;
+			echo $value['movie'];
+			echo '/';
+			echo $value['day'];
+			echo '/';
+			echo $value['time'];
+			echo '" method="Post" id="cart-item';
+			echo $index;
+			echo '">';
+			echo '<div class="item-wrapper">
 			<div class="item-info">
 				<span class="movie-name">' ;
 			echo $value['movie'] ;
 			echo '</span> <br> <span
 					class="movie-session"> Showing at '; 
-			echo $value['day'] + ', ' + $value['time'] ;
+			echo $value['day'] ;
+			echo  ', ' ;
+			echo  $value['time'] ;
 			echo '</span>';
 			echo '</div>';
 			echo '<div class="item-detail">';
@@ -49,15 +62,28 @@ echo $this->Html->css ( 'cartcss' );
 				//print_r($value1[1]['quantity']);
 				if($value1['quantity'] > 0){
 					echo '<tr>';
-					echo '	<th>Standard Full</th>';
-					echo '	<td>$12</td>';
-					echo '	<td>2</td>';
-					echo '	<td>E12 E23</td>';
-					echo '	<td>$24.00</td>';
+					echo '	<th>';
+					echo $tiketType[$i];
+					echo '</th>';
+					echo '	<td> $';
+					echo intval(str_replace('$','',$value1['sub-total']))/intval(str_replace('$','',$value1['quantity']));
+					echo '</td>';
+					echo '	<td>';
+					echo $value1['quantity'];
+					echo '</td>';
+					echo '	<td>';
+					echo $value1['seats'];
+					echo '</td>';
+					echo '	<td>';
+					echo $value1['sub-total'];
+					echo '</td>';
 					echo '</tr>';
+					
 				}
+				intval(str_replace('$','',$value['sub-total']));
 				//echo ($value1['quantity']);
 				$i++;
+				
 			}
 					
 			echo '<tr>';
@@ -70,65 +96,64 @@ echo $this->Html->css ( 'cartcss' );
 			echo	'</table>';
 			echo '</div>';
 			echo '<div class="item-opt">';
-			echo '	<a href="#"><div class="delete-button">delete</div></a>';
+			echo '	<a href="#"><div class="delete-button" ';
+			echo 'onclick="actionFormSubmit(';
+			echo "'";
+			echo 'cart-item';
+			echo $index;
+			echo "'";
+			echo ');">delete</div></a>';
 			echo '</div>';
 			echo '</div>';
+			echo '</form >';
+			$index++;
+			
 			}
 		
+}
+?>
+</head>
+<body>
+
+	<div class="body-wrapper">
 		
+		<?php
+		
+			 display($this->session,$this->webroot);
 		?>
-		<div class="item-wrapper">
-			<div class="item-info">
-				<span class="movie-name">Inside Out</span> <br> <span
-					class="movie-session"> Showing at Monday, 1pm</span>
-			</div>
-			<div class="item-detail">
-				<table>
-					<tr>
-						<th>Ticket Type</th>
-						<th>Cost</th>
-						<th>Qty</th>
-						<th>Seats</th>
-						<th>Subtotal</th>
-					</tr>
-
-
-					<tr>
-						<th>Standard Full</th>
-						<td>$12</td>
-						<td>2</td>
-						<td>E12 E23</td>
-						<td>$24.00</td>
-					</tr>
-					<tr>
-						<td colspan="3"></td>
-						
-						<td>Sub Total</td>
-						<td>$44.00</td>
-					</tr>
-				</table>
-			</div>
-			<div class="item-opt">
-				<a href="#"><div class="delete-button">delete</div></a>
-			</div>
-		</div>
+		<?php
+			$voucher = '';
+			$discount = '0.00%';
+			$grand = 0;
+			if($this->Session->check('check-voucher') && $this->Session->read('check-voucher') == true){
+				$voucher = $this->Session->read('voucher');
+				$discount = '20.00%';
+			} 
+			$grand = $this->Session->read('grand-total');
+		?>
 		
 		<div class="final-info">
-			<label class="total-price" value="">Total: $44.00</label><br> <label
+			<label class="total-price" value="">Total: $<?php echo number_format($this->Session->read ( 'total' ),2); ?> </label><br> <label
 				class="vocher" value="
-				">Meal and Movie Deal Voucher (12345-67890-ZI): 20.00%</label><br> <label
-				value="" label>Grand Total: $95.20</label>
+				">Meal and Movie Deal Voucher (<?php echo $voucher; ?>): <?php echo $discount; ?></label><br> <label
+				value="" label>Grand Total: $<?php echo  number_format($grand, 2); ?></label>
 		</div>
 
 		<div class="group-button-wrapper">
 			<div class="left-button-group">
-				<label for="movie-name"> Vocher Code:</label> <input type="text"
-					name="movie_name" id="movie-name" class="input-area" /> <a href="#"><div
-						class="apply-button">apply</div></a>
+				<form action="<?php echo $this->webroot; ?>booking/checkVocher/" method="Post" id="vocher1">
+					<span id="vocher_label"> Vocher Code:</span> <input type="text"
+						name="vocher_code" id="vocher-code" class="input-area" pattern="/^\d{5}-\d{5}-[A-Z]{2}$/i" /> 
+					<a href="#" onclick="actionFormSubmit('vocher1');"><div class="apply-button">apply</div></a>
+				</form>
 			</div>
 			<div class="right-button-group">
-				<a href="#"><div class="empty-button">empty cart</div></a> <a
-					href="#"><div class="check-button">check out</div></a>
+				<form action="<?php echo $this->webroot; ?>booking/emptyCart/" method="Post" id="emty-cart1">
+					<a href="#" onclick="actionFormSubmit('emty-cart1');"><div class="empty-button">empty cart</div></a>
+				 </form>
+				 <form action="<?php echo $this->webroot; ?>booking/checkout/" method="Post" id="check-out">
+					<a href="#" onclick="actionFormSubmit('check-out');"><div class="check-button">check out</div></a>
+				</form>
 			</div>
 		</div>
 	</div>

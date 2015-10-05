@@ -1,9 +1,31 @@
 
 <?php echo $this->Html->css('bookingcss'); 
 	echo $this->Html->script('bookingJS');
-
+	$tmp = "";
+	if ( $this->Session->check ( 'screenings' )) {
+		foreach ( $this->session->read ('screenings') as &$value ){
+			$tmp .=  $value['movie']; //+  $value['day'] +  $value['time'] + " ";
+			$tmp .= $value['day'];
+			$tmp .= $value['time'];
+			
+			foreach ( $value['seats'] as $key =>  $value1 ) {				
+				$tmp .=$value1['seats'];
+			}
+			$tmp .= ", ";
+		}
+		echo '<script>';
+		echo 'setSeatData("' ;
+		echo $tmp; 
+		echo '");';
+		echo '</script>';
+	}
+	//foreach ( $this->session->read ('screenings') as &$value ) {
+	//		print_r($value);
+	//}
 	
 ?>
+
+
 
 <body onload="initiateMap()">
 
@@ -50,7 +72,7 @@
 				id="error-movie-select"> you have to select movie and chose
 				time</span></label>
 				
-				<?php print_r( $this->Session->read('screenings'));?>
+				<?php //print_r( $this->Session->read('screenings'));?>
 			<div id="seat_map" onclick="seat_onClick(event)">
 
 			</div>

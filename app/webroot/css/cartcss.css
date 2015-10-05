@@ -29,12 +29,13 @@ th {
 	background-color: #333;
 	overflow: auto;
 	border-radius: 5px;
-	margin-top: 10px;
+	margin-top: 400px;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	padding-left: 15px;
 	margin: auto;
-	width:550px;
+	margin-botton:10px;
+	width:650px;
 	color: white;
 }
 .movie-name{
@@ -49,20 +50,23 @@ th {
 	text-align:right;
 	color:white;
 	overflow:auto;
+	padding-right:140px;
 	
 }
 .group-button-wrapper{
 	width:100%;
 	overflow:auto;
+	color:white;
 }
 .left-button-group{
-	width:50%;
+	width:100%;
 	float:left;
 }
 .right-button-group{
-	width: 100;
-	float:right;
-	margin-right:30px;
+	width: 100%;
+	float:left;
+	margin-top:30px;
+	height:40px;
 	display:inline-block;
 }
 .input-area {
@@ -71,8 +75,32 @@ th {
 	height: 30px;
 	width: 170px;
 }
+#vocher-code{
+	margin-left:0px;
+}
+#vocher_label{
+	margin-left:400px;
+}
 .delete-button{
 	margin-top:20px;
+	width: 100px;
+	height: 30px;
+	background: red;
+	border: 1px solid;
+	border-color: red;
+	float: left;
+	border-radius: 8px;
+	font-size: 120%;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	padding-left: 2px;
+	padding-top: 3px;
+	font-weight: bolder;
+	margin-left: 540px;
+}
+.empty-button{
+	
 	width: 150px;
 	height: 30px;
 	background: red;
@@ -88,58 +116,78 @@ th {
 	padding-top: 3px;
 	font-weight: bolder;
 	margin-left: 390px;
-}
-.empty-button{
-	margin-top:20px;
-	width: 150px;
-	height: 30px;
-	background: red;
-	border: 1px solid;
-	border-color: red;
-	float: right;
-	border-radius: 8px;
-	font-size: 120%;
-	color: white;
-	text-transform: uppercase;
-	text-align: center;
-	padding-left: 2px;
-	padding-top: 3px;
-	font-weight: bolder;
-	margin-left: 390px;
+	margin-top:0px;
 }
 .check-button{
-	margin-top:20px;
-	width: 150px;
-	height: 30px;
-	background: red;
-	border: 1px solid;
-	border-color: red;
-	float: right;
-	border-radius: 8px;
-	font-size: 120%;
-	color: white;
-	text-transform: uppercase;
-	text-align: center;
-	padding-left: 2px;
-	padding-top: 3px;
-	font-weight: bolder;
-	margin-left: 390px;
+	
+width: 150px;
+	
+height: 30px;
+	
+background: red;
+	
+border: 1px solid;
+	
+border-color: red;
+	
+float: right;
+	
+border-radius: 8px;
+	
+font-size: 120%;
+	
+color: white;
+	
+text-transform: uppercase;
+	
+text-align: center;
+	
+padding-left: 2px;
+	
+padding-top: 3px;
+	
+font-weight: bolder;
+	
+margin-right: 140px;
+	
+margin-top:0px;
 }
 .apply-button{
-	margin-top:20px;
-	width: 80px;
-	height: 30px;
-	background: red;
-	border: 1px solid;
-	border-color: red;
-	float: right;
-	border-radius: 8px;
-	font-size: 120%;
-	color: white;
-	text-transform: uppercase;
-	text-align: center;
-	padding-left: 2px;
-	padding-top: 3px;
-	font-weight: bolder;
-	margin-left: 390px;
+	
+width: 80px;
+	
+height: 30px;
+	
+background: red;
+	
+border: 1px solid;
+	
+border-color: red;
+	
+float: right;
+	
+border-radius: 8px;
+	
+font-size: 120%;
+	
+color: white;
+	
+text-transform: uppercase;
+	
+text-align: center;
+	
+padding-left: 2px;
+	
+padding-top: 3px;
+	
+font-weight: bolder;
+	
+margin-right: 140px;
+	
+margin-top: 0px;
+}
+.c_row{
+	width: 50px;
+	margin-right:22px;
+	text-transform:uppercase
 }

@@ -1,6 +1,8 @@
 /**
  * 
  */
+var URL = '/SVN_REPOSIBILITY_HTDOCS/PHPCake/';
+var seatData = "";
 var MOVIE_TIMES = {
 	MOVIE1 : {
 		times : [ "Wed", "Thur", "Fri", "Sat", "Sun" ],
@@ -99,6 +101,56 @@ var seat_class_type = {
 	BEAN : 3,
 };
 
+function setURL(link){
+	URL = link;
+}
+function setSeatData(data){
+	seatData = data;
+}
+
+function getUnavaiableSeats(movie, day, time){
+	var tmp = movie + day + time;
+	if(typeof(seatData) == "undefined" || seatData == "")
+		return "";
+	if(seatData.indexOf(tmp) >= 0  ){
+		var array = seatData.split(",");
+		var index;
+		for (index = 0; index < array.length; index++) {
+    		//console.log(a[index]);
+    		if(array[index].indexOf(tmp) >= 0){
+    			return array[index].replace(tmp, "");
+    		}
+
+		}
+	}
+	return "";
+}
+
+
+function setUnavaiableSeatsInMap(seats){
+	var i, j;
+	for(i = 0; i < rowSeat.length; i++){
+		for(j = 0; j < seatMap[i].length; j++){
+			var e = document.getElementById(rowSeat[i].toUpperCase() + j);
+			if(e.className.indexOf("unavaiable") >= 0){
+				removeCSSclassByTag(e,"unavaiable");
+			}
+		}
+	}
+	if(seats == null  || typeof(seats) == "undefined" || seats.trim() == "")
+		return;
+		var array = seats.trim().split(" ");
+		var index;
+		for(index = 0; index < array.length ; index ++){
+			var e = document.getElementById(array[index]);
+			if(e.className.indexOf("unavaiable") < 0){
+				appendCSSclassByTag(e, "unavaiable");
+			}
+		}
+	
+}
+
+
 function addSeatToCart(seatID, type){
 	var e = document.getElementById(type.toUpperCase() + "-cart");
 	var items = e.value;
@@ -106,12 +158,24 @@ function addSeatToCart(seatID, type){
 		items = items + " " + seatID;
 	}
 	 e.value = items;
+	//add to curr cart
+	//e = document.getElementById("curr-cart");
+	// items = e.value;
+	// if(items.indexOf(seatID) < 0 ){
+	//	items = items + " " + seatID;
+	//}
+	// e.value = items;
 }
 function removeSeatFromCart(seatID, type){
 	var e = document.getElementById(type.toUpperCase() + "-cart");
 	var items = e.value;
 	e.value = items.replace(seatID, "").trim();
-	
+	//remove from curr cart
+	//if(type.toUpperCase() == "SC" || type.toUpperCase() == "FC" || type.toUpperCase() == "B3"){
+	//	e = document.getElementById( "curr-cart");
+	//	items = e.value;
+	//	e.value = items.replace(seatID, "").trim();
+	//}
 }
 function creatInternalNode(row, col, status, parent) {
 	var seat = document.createElement("div");
@@ -141,8 +205,11 @@ function createRowSeat(id, length, parent) {
 
 function getSeatType(e) {
 	var id = e.id;
+	var patt = /[A-H][0-13]/g;
 	var row, col;
+	
 	col = parseInt(id.replace(/([A-H])/gi, ''));
+	
 	id = e.id;
 	row = rowSeat.indexOf(id.replace(/([0-9])/gi, ''));
 	return seatMap[row][col];
@@ -172,6 +239,8 @@ function changeTicketQuanity(type, index ,addNum){
 }
 function changeTxTSeat(e, type, text) {
 	var count;
+	if(e.className.indexOf("unavaiable") >= 0)
+		return;
 	if (type == seat_class_type.NORMAL) {
 		count = seat_normal_type.indexOf(text);
 		if (count < 0){
@@ -335,6 +404,7 @@ function initiateMap() {
 	row.style.marginTop = "40px";
 }
 
+
 function getPriceList() {
 	var priceList;
 	var e;
@@ -373,12 +443,20 @@ function getPriceList() {
 
 }
 function calculatePrice(evt) {
-
+	
 	var priceList;
 	var e;
 	var q;
 	var total = 0;
 	setMovieShedule();
+	if(document.getElementById("movie-time").value != "please select"){
+		
+		var tmp2 = "";
+		//tmp += document.getElementById("movie-name").value, document.getElementById("movie-day").value, document.getElementById("movie-time").value; 
+		tmp2 = getUnavaiableSeats(document.getElementById("movie-name").value, document.getElementById("movie-day").value, document.getElementById("movie-time").value);
+		setUnavaiableSeatsInMap(tmp2);
+	}
+	//alert(document.cookie);
 	priceList = getPriceList();
 	if (priceList == null)
 		return;

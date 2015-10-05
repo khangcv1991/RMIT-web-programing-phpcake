@@ -9,6 +9,10 @@ window.onload = function() {
 	mFrom = document.getElementById("mContactForm");
 
 };
+function validatePhone(phone) {
+	var re = /^\d{10}$/i;
+	return re.test(phone);
+}
 function actionFormSubmit() {
 	var flag = 0;
 	var tmpElement;
@@ -18,8 +22,7 @@ function actionFormSubmit() {
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}
-	else{
+	} else {
 		tmpElement = document.getElementById("subject-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
@@ -32,13 +35,13 @@ function actionFormSubmit() {
 			removeCSSclassByTag(tmpElement, "hidden-error");
 			appendCSSclassByTag(tmpElement, "display-error");
 			flag = 1;
-		}else{
+		} else {
 			tmpElement = document.getElementById("cusType-error");
 			removeCSSclassByTag(tmpElement, "display-error");
 			appendCSSclassByTag(tmpElement, "hidden-error");
 		}
-		
-	}else{
+
+	} else {
 		tmpElement = document.getElementById("cusType-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
@@ -50,7 +53,7 @@ function actionFormSubmit() {
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}else{
+	} else {
 		tmpElement = document.getElementById("cusName-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
@@ -63,19 +66,20 @@ function actionFormSubmit() {
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}else{
+	} else {
 		tmpElement = document.getElementById("cusEmail-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
 	}
 
 	tmpElement = document.getElementById("cust-phone-txt-area");
-	if (tmpElement.value == null || tmpElement.value.trim() == '') {
+	if (tmpElement.value == null || tmpElement.value.trim() == ''
+			|| validatePhone(tmpElement.value.trim()) == false) {
 		tmpElement = document.getElementById("cusPhone-error");
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}else{
+	} else {
 		tmpElement = document.getElementById("cusPhone-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
@@ -87,32 +91,31 @@ function actionFormSubmit() {
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}else{
+	} else {
 		tmpElement = document.getElementById("cusPostcode-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
 	}
 
-	
 	tmpElement = document.getElementById("cust-mess-txt-area");
 	if (tmpElement.value == null || tmpElement.value.trim() == '') {
 		tmpElement = document.getElementById("cusMess-error");
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}else{
+	} else {
 		tmpElement = document.getElementById("cusMess-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");
 	}
-	
+
 	tmpElement = document.getElementById("cust-confirm-box");
 	if (tmpElement.value == null || tmpElement.value.trim() == '') {
 		tmpElement = document.getElementById("cusMess-error");
 		removeCSSclassByTag(tmpElement, "hidden-error");
 		appendCSSclassByTag(tmpElement, "display-error");
 		flag = 1;
-	}else{
+	} else {
 		tmpElement = document.getElementById("cusMess-error");
 		removeCSSclassByTag(tmpElement, "display-error");
 		appendCSSclassByTag(tmpElement, "hidden-error");

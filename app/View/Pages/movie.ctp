@@ -1,4 +1,6 @@
-<?php echo $this->Html->css('moviecss'); 
+<?php 
+	echo $this->Html->css('moviecss'); 
+	echo $this->Html->script('movieJS');
 ?>
 <div class="body-wrapper">
 	<div class="movie-list-wrapper">
