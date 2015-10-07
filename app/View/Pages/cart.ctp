@@ -6,6 +6,7 @@
 echo $this->Html->css ( 'cartcss' );
 echo $this->Html->script('cartJS');
 function display( $session, $webroot ){
+	
 	if($session->read ('screenings') == null)
 		 	return;
 	echo $session->read['check-vocher'];
@@ -147,6 +148,16 @@ function display( $session, $webroot ){
 					<a href="#" onclick="actionFormSubmit('vocher1');"><div class="apply-button">apply</div></a>
 				</form>
 			</div>
+			<?php 
+			echo '<script>';
+			echo 'displayNoticeMessage(';
+			echo "'";
+			echo $this->Session->flash();
+			echo "'";
+			echo ');';
+			
+			echo '</script>';
+			?>
 			<div class="right-button-group">
 				<form action="<?php echo $this->webroot; ?>booking/emptyCart/" method="Post" id="emty-cart1">
 					<a href="#" onclick="actionFormSubmit('emty-cart1');"><div class="empty-button">empty cart</div></a>

@@ -11,14 +11,18 @@ function actionFormSubmit(formID) {
 
 	if (e.id == "vocher1") {
 		var tmp = e[0];
-		if(validateCode(tmp.value) == true){
+		if (validateCode(tmp.value) == true) {
 			e.submit();
-		}
-		else{
+		} else {
 			alert("input worng format!");
 		}
 	} else {
 		e.submit();
 	}
 
+}
+function displayNoticeMessage(msg) {
+	if (msg.trim() != "" && msg != null && typeof (msg) != "undefined") {
+		alert("Invalid voucher code!");
+	}
 }

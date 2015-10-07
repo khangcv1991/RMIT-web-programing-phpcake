@@ -116,6 +116,7 @@
 	padding-left: 2px;
 	padding-top: 3px;
 	font-weight: bolder;
+	cursor:pointer;
 }
 /*text*/
 .see-more {
@@ -131,4 +132,5 @@
 .show-text {
 	display: block;
 	text-decoration: none;
+	transition-duration: 1s;
 }

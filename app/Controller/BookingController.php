@@ -213,11 +213,13 @@ class BookingController extends AppController {
 			$this->Session->write ( 'check-voucher' ,true);
 			$this->Session->write ( 'voucher' , $this->request->data['vocher_code'] );
 			$this->Session->write ( 'grand-total' ,round( intval( $this->Session->read ( 'total' ) ) * 80/ 100) );
+			
 			return $this->redirect ( '/pages/cart');
 		}		
 		$this->Session->write ( 'check-voucher' , false);
 		$this->Session->delete ( 'voucher');
 		$this->Session->write ( 'grand-total' , intval( $this->Session->read ( 'total')));
+		$this->Session->setFlash('your voucher does not exist!');
 		return $this->redirect ( '/pages/cart' );
 	}
 	public function confirm(){

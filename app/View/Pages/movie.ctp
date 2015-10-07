@@ -23,7 +23,6 @@
 							<div class="right-movie-info">
 								<ul class="movie-category">
 									<li>Action</li>
-
 								</ul>
 							</div>
 						</div>
@@ -111,9 +110,15 @@
 						<div class="movie-buttons">
 							<a href="bookingpage.html">
 								<div class="booking-button">book now</div>
-							</a> <a href="">
+							</a> 
+							<span onclick="collapseVideo(event);">
 								<div class="trailer-button">Watch Tralier</div>
-							</a>
+							</span>
+							<br>
+							<br>
+							<div  class="hide-text" id="panel1"><iframe width="420" height="345"
+									src="http://www.youtube.com/embed/XGSy3_Czz8k">
+									</iframe></div>
 						</div>
 					</div>
 				</div>
@@ -168,9 +173,15 @@
 						<div class="movie-buttons">
 							<a href="bookingpage.html">
 								<div class="booking-button">book now</div>
-							</a> <a href="">
+							</a> 
+							<span onclick="collapseVideo(event);">
 								<div class="trailer-button">Watch Tralier</div>
-							</a>
+							</span>
+							<br>
+							<br>
+							<div  class="hide-text" id="panel1"><iframe width="420" height="345"
+									src="http://www.youtube.com/embed/XGSy3_Czz8k">
+									</iframe></div>
 						</div>
 					</div>
 				</div>
@@ -230,9 +241,15 @@
 						<div class="movie-buttons">
 							<a href="bookingpage.html">
 								<div class="booking-button">book now</div>
-							</a> <a href="">
+							</a> 
+							<span onclick="collapseVideo(event);">
 								<div class="trailer-button">Watch Tralier</div>
-							</a>
+							</span>
+							<br>
+							<br>
+							<div  class="hide-text" id="panel1"><iframe width="420" height="345"
+									src="http://www.youtube.com/embed/XGSy3_Czz8k">
+									</iframe></div>
 						</div>
 					</div>
 				</div>
@@ -322,9 +339,15 @@
 						<div class="movie-buttons">
 							<a href="bookingpage.html">
 								<div class="booking-button">book now</div>
-							</a> <a href="">
+							</a> 
+							<span onclick="collapseVideo(event);">
 								<div class="trailer-button">Watch Tralier</div>
-							</a>
+							</span>
+							<br>
+							<br>
+							<div  class="hide-text" id="panel1"><iframe width="420" height="345"
+									src="http://www.youtube.com/embed/XGSy3_Czz8k">
+									</iframe></div>
 						</div>
 					</div>
 				</div>
