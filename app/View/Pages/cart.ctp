@@ -56,6 +56,7 @@ function display( $session, $webroot ){
 			echo '			<th>Qty</th>';
 			echo '			<th>Seats</th>';
 			echo '			<th>Subtotal</th>';
+			echo '			<th>option</th>';
 			
 			echo '		</tr>';
 			$i = 0;		
@@ -77,6 +78,26 @@ function display( $session, $webroot ){
 					echo '</td>';
 					echo '	<td>';
 					echo $value1['sub-total'];
+					echo '</td>';
+					
+					echo '	<td>';
+					
+					
+					echo '	<a href="#"><div ';
+					echo 'onclick="submitDeleteForm(';
+					echo "'";
+					echo $webroot;
+					echo 'booking/deleteItem/' ;
+					echo $value['movie'];
+					echo '/';
+					echo $value['day'];
+					echo '/';
+					echo $value['time'];
+					echo '/';
+					echo $i;
+					echo "'";
+					echo ');">delete</div></a>';
+					
 					echo '</td>';
 					echo '</tr>';
 					

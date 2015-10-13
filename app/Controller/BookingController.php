@@ -1,9 +1,7 @@
 <?php
 class BookingController extends AppController {
-	
 	public function add() {
 		// $this->log($this->Session->id().':'.$this->here.':'.'/*relevant message about whatsup*/', LOG_DEBUG);
-			
 		$helper = array (
 				'Html',
 				'Form',
@@ -95,13 +93,13 @@ class BookingController extends AppController {
 					$screening 
 			) );
 			// $this->Cookie->write ( $movie_name + $movie_day + $movie_time, $tseats, $encrypt = false, $expires = null );
-			$this->Session->write ( 'total', intval ( str_replace ( '$', '',$this->request->data ['total_price'])) );
-			if($this->Session->check('check-voucher') && $this->Session->read('check-voucher') == true){
-				$this->Session->write ( 'grand-total' ,round( intval( $this->Session->read ( 'total' ) ) * 80/ 100) );
-			}else {
-				$this->Session->write ( 'grand-total' ,intval( $this->Session->read ( 'total' ) ) );
+			$this->Session->write ( 'total', intval ( str_replace ( '$', '', $this->request->data ['total_price'] ) ) );
+			if ($this->Session->check ( 'check-voucher' ) && $this->Session->read ( 'check-voucher' ) == true) {
+				$this->Session->write ( 'grand-total', round ( intval ( $this->Session->read ( 'total' ) ) * 80 / 100 ) );
+			} else {
+				$this->Session->write ( 'grand-total', intval ( $this->Session->read ( 'total' ) ) );
 			}
-			//debug($this->request->data ['total_price'] );
+			// debug($this->request->data ['total_price'] );
 		} else {
 			$data = $this->Session->read ( 'screenings' );
 			$data [] = $screening;
@@ -115,10 +113,10 @@ class BookingController extends AppController {
 			}
 			
 			$this->Session->write ( 'total', $total );
-			if($this->Session->check('check-voucher') && $this->Session->read('check-voucher') == true){
-				$this->Session->write ( 'grand-total' ,round( intval( $this->Session->read ( 'total' ) ) * 80/ 100) );
-			}else {
-				$this->Session->write ( 'grand-total' ,intval( $this->Session->read ( 'total' ) ) );
+			if ($this->Session->check ( 'check-voucher' ) && $this->Session->read ( 'check-voucher' ) == true) {
+				$this->Session->write ( 'grand-total', round ( intval ( $this->Session->read ( 'total' ) ) * 80 / 100 ) );
+			} else {
+				$this->Session->write ( 'grand-total', intval ( $this->Session->read ( 'total' ) ) );
 			}
 			// $this->Cookie->write ( $movie_name + $movie_day + $movie_time, $tseats, $encrypt = false, $expires = null );
 		}
@@ -135,102 +133,180 @@ class BookingController extends AppController {
 			if (strcmp ( $value ['movie'], $movie ) == 0 && strcmp ( $value ['day'], $day ) == 0 && strcmp ( $value ['time'], $time ) == 0) {
 				// return $this->redirect ( '/pages/home' );
 				$tmp = $this->Session->read ( 'screenings' );
-				unset ( $tmp [$i] );
+				
 				$this->Session->write ( 'screenings', array_values ( $tmp ) );
-				$tmpTotal =intval( str_replace ( '$', '', $this->Session->read ( 'total' ) ) ) - intval ( str_replace ( '$', '', $value ['sub-total'] ) );
+				$tmpTotal = intval ( str_replace ( '$', '', $this->Session->read ( 'total' ) ) ) - intval ( str_replace ( '$', '', $value ['sub-total'] ) );
 				$this->Session->delete ( 'total' );
-				 $this->Session->write ( 'total' ,$tmpTotal);
+				$this->Session->write ( 'total', $tmpTotal );
+				if ($this->Session->check ( 'check-voucher' ) && $this->Session->read ( 'check-voucher' ) == true) {
+					$this->Session->write ( 'grand-total', round ( intval ( $this->Session->read ( 'total' ) ) * 80 / 100 ) );
+				} else {
+					$this->Session->write ( 'grand-total', intval ( $this->Session->read ( 'total' ) ) );
+				}
+				unset ( $tmp [$i] );
+				$this->Session->delete ( 'screenings' );
+				$this->Session->write ( 'screenings', $tmp );
 				return $this->redirect ( '/pages/cart' );
 			}
 			$i ++;
 		}
 	}
+	public function deleteItem($movie, $day, $time, $line) {
+		$i = 0;		
+		
+		foreach ( $this->Session->read ( 'screenings' ) as $key => $value ) {
+			
+			// $total += intval(str_replace('$','',$value['sub-total']));
+			if (strcmp ( $value ['movie'], $movie ) == 0 && strcmp ( $value ['day'], $day ) == 0 && strcmp ( $value ['time'], $time ) == 0) {
+				// return $this->redirect ( '/pages/home' );
+				$tmp = $this->Session->read ( 'screenings' );
+				//print_r($tmp);
+				$subTotal = $tmp [$i]['seats'] [$line] ['sub-total'];
+				//print_r($subTotal);
+				
+				$this->Session->write ( 'screenings', array_values ( $tmp ) );
+				
+				$tmpTotal = intval ( str_replace ( '$', '', $this->Session->read ( 'total' ) ) ) - intval ( str_replace ( '$', '',$subTotal) );
+				//print_r($tmpTotal);
+				$this->Session->delete ( 'total' );
+				$this->Session->write ( 'total', $tmpTotal );
+				
+				$tmpTotal = intval ( str_replace ( '$', '', $tmp[$i]['sub-total']) ) - intval ( str_replace ( '$', '',$subTotal) );
+				$tmp[$i]['sub-total'] = '$'.$tmpTotal.'.00';
+				
+			
+				//unset ( $tmp [$i]['seats'] [$line] );
+				$tmparray = array (
+						"quantity" => 0,
+						"seats" => '',
+						"sub-total" => ''
+				);
+				$tmp [$i]['seats'] [$line] = $tmparray;
+				if ($this->Session->check ( 'check-voucher' ) && $this->Session->read ( 'check-voucher' ) == true) {
+					$this->Session->write ( 'grand-total', round ( intval ( $this->Session->read ( 'total' ) ) * 80 / 100 ) );
+				} else {
+					$this->Session->write ( 'grand-total', intval ( $this->Session->read ( 'total' ) ) );
+				}
+				$this->Session->delete ( 'screenings' );
+				$this->Session->write ( 'screenings', $tmp );
+				
+				return $this->redirect ( '/pages/cart' );
+			}
+			$i ++;
+		}
+		return $this->redirect ( '/pages/cart' ); 
+	}
 	public function emptyCart() {
 		$this->Session->delete ( 'screenings' );
 		$this->Session->delete ( 'total' );
-		$this->Session->write ( 'check-voucher' , false);
+		$this->Session->write ( 'check-voucher', false );
 		$this->Session->delete ( 'grand-total' );
-		$this->Session->write ( 'total',0 );
+		$this->Session->write ( 'total', 0 );
 		return $this->redirect ( '/pages/cart' );
 	}
 	public function checkout() {
-		
-		if($this->Session->read ( 'screenings') == null)
+		if ($this->Session->read ( 'screenings' ) == null)
 			return $this->redirect ( '/pages/cart' );
 		
 		return $this->redirect ( '/pages/customer' );
-		
 	}
-	public function displayDetail(){
-		$customer = $this->request->data('customer');
-		$email = $this->request->data('email');
-		$phone = $this->request->data('phone');
+	public function displayDetail() {
+		$customer = $this->request->data ( 'customer' );
+		$email = $this->request->data ( 'email' );
+		$phone = $this->request->data ( 'phone' );
 		
-		$this->Session->write('name', $customer);
-		$this->Session->write('email', $email);
-		$this->Session->write('phone', $phone);
+		$this->Session->write ( 'name', $customer );
+		$this->Session->write ( 'email', $email );
+		$this->Session->write ( 'phone', $phone );
 		
-		
-		$array = array('name' => $this->Session->read ('name'),
-						'phone' => $this->Session->read ( 'phone'),
-						'email'=>$this->Session->read ( 'email'),
-						'screenings' =>$this->Session->read ( 'screenings')
+		$array = array (
+				'name' => $this->Session->read ( 'name' ),
+				'phone' => $this->Session->read ( 'phone' ),
+				'email' => $this->Session->read ( 'email' ),
+				'screenings' => $this->Session->read ( 'screenings' ) 
 		);
-		//$array = $this->Session->read ( 'screenings');
-		//print_r($array);
+		// $array = $this->Session->read ( 'screenings');
+		// print_r($array);
 		
-		//print_r(json_encode ($array));
-		$this->Session->write('json', json_encode ($array));
+		// print_r(json_encode ($array));
+		$this->Session->write ( 'json', json_encode ( $array ) );
 		return $this->redirect ( '/pages/checkout' );
 	}
-	
-	public function checkVocher(){
-		$alpha = array('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I' ,'J', 'K','L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z');		
-		$code = $this->request->data['vocher_code'];
-		$array = str_split(str_replace('-', '', $code));
-		debug(count($array));
-		if($code == null || strcmp(trim($code), '') == 0 || count($array) != 12){
-			debug(print_r($array));
-			$this->Session->write ( 'check-voucher' , false);
-			$this->Session->delete ( 'voucher');
-			$this->Session->write ( 'grand-total' , intval( $this->Session->read ( 'total')));
-			debug(print_r($array));
-			debug(count($array) );
+	public function checkVocher() {
+		$alpha = array (
+				'A',
+				'B',
+				'C',
+				'D',
+				'E',
+				'F',
+				'G',
+				'H',
+				'I',
+				'J',
+				'K',
+				'L',
+				'M',
+				'N',
+				'O',
+				'P',
+				'Q',
+				'R',
+				'S',
+				'T',
+				'U',
+				'V',
+				'W',
+				'X',
+				'Y',
+				'Z' 
+		);
+		$code = $this->request->data ['vocher_code'];
+		$array = str_split ( str_replace ( '-', '', $code ) );
+		debug ( count ( $array ) );
+		if ($code == null || strcmp ( trim ( $code ), '' ) == 0 || count ( $array ) != 12) {
+			debug ( print_r ( $array ) );
+			$this->Session->write ( 'check-voucher', false );
+			$this->Session->delete ( 'voucher' );
+			$this->Session->write ( 'grand-total', intval ( $this->Session->read ( 'total' ) ) );
+			debug ( print_r ( $array ) );
+			debug ( count ( $array ) );
 			return;
-			//return $this->redirect ( '/pages/home');
+			// return $this->redirect ( '/pages/home');
 		}
-			//
+		//
 		
+		$chk1 = $alpha [((intval ( $array [0] ) * intval ( $array [1] ) + intval ( $array [2] )) * intval ( $array [3] ) + intval ( $array [4] )) % 26];
+		$chk2 = $alpha [((intval ( $array [5] ) * intval ( $array [6] ) + intval ( $array [7] )) * intval ( $array [8] ) + intval ( $array [9] )) % 26];
 		
-		
+		debug ( $this->Session->check ( 'check-voucher' ) );
+		debug ( $this->Session->read ( 'check-voucher' ) );
+		if ((! $this->Session->check ( 'check-voucher' ) || $this->Session->read ( 'check-voucher' ) == false) && strcmp ( $chk1, $array [count ( $array ) - 2] ) == 0 && strcmp ( $chk2, $array [count ( $array ) - 1] ) == 0) {
+			$this->Session->write ( 'check-voucher', true );
+			$this->Session->write ( 'voucher', $this->request->data ['vocher_code'] );
+			$this->Session->write ( 'grand-total', round ( intval ( $this->Session->read ( 'total' ) ) * 80 / 100 ) );
 			
-		$chk1 = $alpha[((intval($array[0]) * intval($array[1]) + intval($array[2])) * intval($array[3]) + intval($array[4]))%26];
-		$chk2 = $alpha[((intval($array[5]) * intval($array[6]) + intval($array[7])) * intval($array[8]) + intval($array[9]))%26];
-		
-		debug($this->Session->check ( 'check-voucher' ));
-		debug($this->Session->read ( 'check-voucher' ));
-		if( (!$this->Session->check ( 'check-voucher' ) || $this->Session->read ( 'check-voucher' ) == false) && strcmp($chk1, $array[count($array) - 2]) == 0 && strcmp($chk2, $array[count($array) - 1]) == 0){
-			$this->Session->write ( 'check-voucher' ,true);
-			$this->Session->write ( 'voucher' , $this->request->data['vocher_code'] );
-			$this->Session->write ( 'grand-total' ,round( intval( $this->Session->read ( 'total' ) ) * 80/ 100) );
-			
-			return $this->redirect ( '/pages/cart');
-		}		
-		$this->Session->write ( 'check-voucher' , false);
-		$this->Session->delete ( 'voucher');
-		$this->Session->write ( 'grand-total' , intval( $this->Session->read ( 'total')));
-		$this->Session->setFlash('your voucher does not exist!');
+			return $this->redirect ( '/pages/cart' );
+		}
+		$this->Session->write ( 'check-voucher', false );
+		$this->Session->delete ( 'voucher' );
+		$this->Session->write ( 'grand-total', intval ( $this->Session->read ( 'total' ) ) );
+		$this->Session->setFlash ( 'your voucher does not exist!' );
 		return $this->redirect ( '/pages/cart' );
 	}
-	public function confirm(){
-		$this->Session->delete ( 'name');
-		$this->Session->delete ( 'phone');
-		$this->Session->delete ( 'email');
-		$this->Session->delete ( 'screenings');
-		$this->Session->delete ( 'voucher');
-		$this->Session->delete ( 'check-voucher');
-		$this->Session->delete ( 'grand-total');
-		$this->Session->delete ( 'total');
+	public function confirm() {
+		$myfile = fopen ( $this->Session->read ( 'email' ), "w" ) or die ( "Unable to open file!" );
+		fwrite ( $myfile, $this->Session->read ( 'json' ) );
+		fclose ( $myfile );
+		$this->Session->delete ( 'json' );
+		$this->Session->delete ( 'name' );
+		$this->Session->delete ( 'phone' );
+		$this->Session->delete ( 'email' );
+		$this->Session->delete ( 'screenings' );
+		$this->Session->delete ( 'voucher' );
+		$this->Session->delete ( 'check-voucher' );
+		$this->Session->delete ( 'grand-total' );
+		$this->Session->delete ( 'total' );
 		
 		return $this->redirect ( '/pages/' );
 	}

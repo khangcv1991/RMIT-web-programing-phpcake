@@ -26,3 +26,9 @@ function displayNoticeMessage(msg) {
 		alert("Invalid voucher code!");
 	}
 }
+function submitDeleteForm(url){
+	var f = document.createElement("form");
+	f.setAttribute('method',"post");
+	f.setAttribute('action',url);
+	f.submit();
+}
