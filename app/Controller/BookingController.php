@@ -1,5 +1,66 @@
 <?php
 class BookingController extends AppController {
+	protected function _getTimetable() {
+		$PRICE_LIST_M_T = array (
+				'S_FU' => 12,
+				'S_CO' => 10,
+				'S_CH' => 8,
+				'F_AD' => 25,
+				'F_CH' => 20,
+				'BB' => 20 
+		);
+		$PRICE_LIST_W_F = array (
+				'S_FU' => 18,
+				'S_CO' => 15,
+				'S_CH' => 12,
+				'F_AD' => 30,
+				'F_CH' => 25,
+				'BB' => 30 
+		);
+		$e = $this->request->data ( 'movie_day' );
+		if (strcmp ( trim ( $e ), "Mon" ) == 0 || strcmp ( trim ( $e ), "Tue" ) == 0) {
+			return $PRICE_LIST_M_T;
+		}
+		if (strcmp ( trim ( $e ), "please select" ) == 0)
+			return null;
+		if (strcmp ( trim ( $e ), "Sat" ) == 0 || strcmp ( trim ( $e ), "Sun" ) == 0) {
+			return $PRICE_LIST_W_F;
+			// return priceList;
+		}
+		if (strcmp ( trim ( $e ), "Sat" ) != 0 || strcmp ( trim ( $e ), "Sun" ) != 0) {
+			$e = $this->request->data ( 'movie_time' );
+			if (strcmp ( trim ( $e ), "please select" ) == 0)
+				return null;
+			if (strcmp ( trim ( $e ), "1PM" ) == 0) {
+				return $PRICE_LIST_M_T;
+				// return priceList;
+			} else {
+				return $PRICE_LIST_W_F;
+				// return priceList;
+			}
+		}
+	}
+	protected function _checkTotal() {
+		$timetable = $this->_getTimetable ();
+		$total = 0;
+		$total += intval ( $this->request->data ['SA_quanity'] ) * $timetable ['S_FU'];
+		$total += intval ( $this->request->data ['SP_quanity'] ) * $timetable ['S_CO'];
+		$total += intval ( $this->request->data ['SC_quanity'] ) * $timetable ['S_CH'];
+		$total += intval ( $this->request->data ['FA_quanity'] ) * $timetable ['F_AD'];
+		$total += intval ( $this->request->data ['FC_quanity'] ) * $timetable ['F_CH'];
+		$total += intval ( $this->request->data ['B1_quanity'] ) * $timetable ['BB'];
+		$total += intval ( $this->request->data ['B2_quanity'] ) * $timetable ['BB'];
+		$total += intval ( $this->request->data ['B3_quanity'] ) * $timetable ['BB'];
+		print_r ( intval ( $this->request->data ['SA_quanity'] ) );
+		print_r ( $timetable ['F_AD'] );
+		print_r ( $this->request->data ['total_price'] );
+		if ($total != intval ( str_replace ( '$', '', $this->request->data ['total_price'] ) )) {
+			$this->Session->setFlash ( 'invalid reservation!' );
+			return false;
+		}
+		
+		return true;
+	}
 	public function add() {
 		// $this->log($this->Session->id().':'.$this->here.':'.'/*relevant message about whatsup*/', LOG_DEBUG);
 		$helper = array (
@@ -7,6 +68,9 @@ class BookingController extends AppController {
 				'Form',
 				'Session' 
 		);
+		if ($this->_checkTotal () == false)
+			// return $this->redirect ( '/pages/booking' );
+			return;
 		$tseats = "";
 		$movie_name = $this->request->data ['movie_name'];
 		$movie_day = $this->request->data ['movie_day'];
@@ -152,7 +216,7 @@ class BookingController extends AppController {
 		}
 	}
 	public function deleteItem($movie, $day, $time, $line) {
-		$i = 0;		
+		$i = 0;
 		
 		foreach ( $this->Session->read ( 'screenings' ) as $key => $value ) {
 			
@@ -160,28 +224,27 @@ class BookingController extends AppController {
 			if (strcmp ( $value ['movie'], $movie ) == 0 && strcmp ( $value ['day'], $day ) == 0 && strcmp ( $value ['time'], $time ) == 0) {
 				// return $this->redirect ( '/pages/home' );
 				$tmp = $this->Session->read ( 'screenings' );
-				//print_r($tmp);
-				$subTotal = $tmp [$i]['seats'] [$line] ['sub-total'];
-				//print_r($subTotal);
+				// print_r($tmp);
+				$subTotal = $tmp [$i] ['seats'] [$line] ['sub-total'];
+				// print_r($subTotal);
 				
 				$this->Session->write ( 'screenings', array_values ( $tmp ) );
 				
-				$tmpTotal = intval ( str_replace ( '$', '', $this->Session->read ( 'total' ) ) ) - intval ( str_replace ( '$', '',$subTotal) );
-				//print_r($tmpTotal);
+				$tmpTotal = intval ( str_replace ( '$', '', $this->Session->read ( 'total' ) ) ) - intval ( str_replace ( '$', '', $subTotal ) );
+				// print_r($tmpTotal);
 				$this->Session->delete ( 'total' );
 				$this->Session->write ( 'total', $tmpTotal );
 				
-				$tmpTotal = intval ( str_replace ( '$', '', $tmp[$i]['sub-total']) ) - intval ( str_replace ( '$', '',$subTotal) );
-				$tmp[$i]['sub-total'] = '$'.$tmpTotal.'.00';
+				$tmpTotal = intval ( str_replace ( '$', '', $tmp [$i] ['sub-total'] ) ) - intval ( str_replace ( '$', '', $subTotal ) );
+				$tmp [$i] ['sub-total'] = '$' . $tmpTotal . '.00';
 				
-			
-				//unset ( $tmp [$i]['seats'] [$line] );
+				// unset ( $tmp [$i]['seats'] [$line] );
 				$tmparray = array (
 						"quantity" => 0,
 						"seats" => '',
-						"sub-total" => ''
+						"sub-total" => '' 
 				);
-				$tmp [$i]['seats'] [$line] = $tmparray;
+				$tmp [$i] ['seats'] [$line] = $tmparray;
 				if ($this->Session->check ( 'check-voucher' ) && $this->Session->read ( 'check-voucher' ) == true) {
 					$this->Session->write ( 'grand-total', round ( intval ( $this->Session->read ( 'total' ) ) * 80 / 100 ) );
 				} else {
@@ -194,7 +257,7 @@ class BookingController extends AppController {
 			}
 			$i ++;
 		}
-		return $this->redirect ( '/pages/cart' ); 
+		return $this->redirect ( '/pages/cart' );
 	}
 	public function emptyCart() {
 		$this->Session->delete ( 'screenings' );
@@ -225,10 +288,7 @@ class BookingController extends AppController {
 				'email' => $this->Session->read ( 'email' ),
 				'screenings' => $this->Session->read ( 'screenings' ) 
 		);
-		// $array = $this->Session->read ( 'screenings');
-		// print_r($array);
 		
-		// print_r(json_encode ($array));
 		$this->Session->write ( 'json', json_encode ( $array ) );
 		return $this->redirect ( '/pages/checkout' );
 	}
@@ -309,6 +369,18 @@ class BookingController extends AppController {
 		$this->Session->delete ( 'total' );
 		
 		return $this->redirect ( '/pages/' );
+	}
+	public function viewReservarion() {
+		$filename = $this->request->data['email'];
+		$myfile = fopen($filename, "r") or die("Unable to open file!");
+		$this->Session->write('json',fread($myfile,filesize($filename)));
+		fclose($myfile);		
+		
+		return $this->redirect ( '/pages/checkout' );
+		
+		
+		
+		
 	}
 }
 

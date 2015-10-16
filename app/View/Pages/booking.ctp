@@ -30,7 +30,7 @@
 <body onload="initiateMap()">
 
 <div class="body-wrapper" >
-	
+	<?php echo $this->Session->flash();?>	
 	<form action="<?php echo $this->webroot; ?>booking/add/" method="Post" id="mBookingForm">
 		<input type="hidden" id="curr-cart" name="curr_cart" value=""/>
 		<input type="hidden" id="SA-cart" name="SA_cart" value=""/>
@@ -72,7 +72,7 @@
 				id="error-movie-select"> you have to select movie and chose
 				time</span></label>
 				
-				<?php //print_r( $this->Session->read('screenings'));?>
+				
 			<div id="seat_map" onclick="seat_onClick(event)">
 
 			</div>
